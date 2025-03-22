@@ -1,0 +1,7 @@
+{
+    "TelaLogin":{
+        "cmpUsername": "", 
+        "cmpPassword": "", 
+        "btnLogin": ""
+    }
+}
