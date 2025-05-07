@@ -1,7 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
 Library    ../core/Utils.py
-Resource    ../recursos/propriedades/locators.json
 
 *** Variables ***
 ${tempoDeEsperaPadraoSelenium}    5
@@ -16,19 +15,20 @@ Acessar Site
     Set Selenium Implicit Wait    ${tempoDeEsperaPadraoSelenium}
 
 Aguardar Elemento Presente
-    [Arguments]    ${jsonPathCampo}
-    ${locator}=    Obter Locator    ${jsonPathCampo}
-    Wait Until Page Contains Element    ${locator}    ${tempoDeEspera}    None    None
+    [Arguments]    ${locator}
+    Wait Until Page Contains Element    ${locator}    ${tempoDeEspera}    None
 
 Aguardar Elemento Visivel
-    [Arguments]    ${jsonPathCampo}
-    ${locator}=    Obter Locator    ${jsonPathCampo}
+    [Arguments]    ${locator}
     Wait Until Element Is Visible    ${locator}    ${tempoDeEspera}    None
 
 Aguardar Elemento Habilitado
-    [Arguments]    ${jsonPathCampo}
-    ${locator}=    Obter Locator    ${jsonPathCampo}
+    [Arguments]    ${locator}
     Wait Until Element Is Enabled    ${locator}    ${tempoDeEspera}    None
+
+Aguardar Url Ser
+    [Arguments]    ${url}
+    Wait For Expected Condition    url_to_be    ${url}
 
 Escrever no Campo
     [Arguments]    ${jsonPathCampo}    ${valor}
@@ -92,14 +92,10 @@ Marcar CheckBox
 
 Fechar Browser
     Close Window
+    Close Browser
 
 Tirar Printscreen
     Capture Page Screenshot
-
-Obter Locator
-    [Arguments]    ${jsonPath}
-    ${locator}=    Utils.Obter Locator    ${caminhoArquivoJsonLocators}    ${jsonPath}
-    RETURN    ${locator}
 
 Encerrar Teste
     Tirar Printscreen

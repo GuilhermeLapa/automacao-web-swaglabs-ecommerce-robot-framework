@@ -1,5 +1,3 @@
-from enum import Enum
-
 class TiposBrowser():
     def __init__(self):
         pass;
